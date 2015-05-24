@@ -1,0 +1,34 @@
+{
+  "name": "reactjs-karma-gulp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "browserify": "ulimit -n 2560 && gulp browserify",
+    "build": "ulimit -n 2560 && gulp build",
+    "clean": "gulp clean",
+    "test": "ulimit -n 2560 && gulp karma",
+    "watch": "ulimit -n 2560 && gulp watch"
+  },
+  "author": "Kenichi Ohtomi",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "babelify": "^6.1.1",
+    "browserify": "^10.2.1",
+    "espowerify": "^0.10.0",
+    "gulp": "^3.8.11",
+    "gulp-plumber": "^1.0.1",
+    "karma": "^0.12.32",
+    "karma-browserify": "^4.2.1",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-cli": "0.0.4",
+    "karma-mocha": "^0.1.10",
+    "mocha": "^2.2.5",
+    "power-assert": "^0.11.0",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
