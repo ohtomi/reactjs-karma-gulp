@@ -6,6 +6,7 @@ var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var reactify = require('reactify');
 var karma = require('karma').server;
+var jshint = require('gulp-jshint');
 
 var handleError = function(err) {
   console.log(err.toString());
@@ -36,6 +37,14 @@ gulp.task('karma', ['browserify'], function(done) {
   }, function(exitStatus) {
     done(exitStatus ? 'There are failing unit tests' : undefined);
   });
+});
+
+gulp.task('jsxhint', function() {
+  gulp.src(['./src/main/js/**/*.js'])
+    .pipe(jshint({
+      linter: require('jshint-jsx').JSXHINT
+    }))
+    .pipe(jshint.reporter('default'));
 });
 
 gulp.task('watch', function() {

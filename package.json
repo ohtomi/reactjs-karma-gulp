@@ -7,6 +7,8 @@
     "browserify": "ulimit -n 2560 && gulp browserify",
     "build": "ulimit -n 2560 && gulp build",
     "clean": "gulp clean",
+    "eslint": "gulp eslint",
+    "jsxhint": "gulp jsxhint",
     "test": "ulimit -n 2560 && gulp karma",
     "watch": "ulimit -n 2560 && gulp watch"
   },
@@ -20,7 +22,9 @@
     "browserify": "^10.2.1",
     "espowerify": "^0.10.0",
     "gulp": "^3.8.11",
+    "gulp-jshint": "^1.11.0",
     "gulp-plumber": "^1.0.1",
+    "jshint-jsx": "^0.4.1",
     "karma": "^0.12.32",
     "karma-browserify": "^4.2.1",
     "karma-chrome-launcher": "^0.1.12",
