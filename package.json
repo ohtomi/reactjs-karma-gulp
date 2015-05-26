@@ -9,6 +9,8 @@
     "clean": "gulp clean",
     "eslint": "gulp eslint",
     "jsxhint": "gulp jsxhint",
+    "sass": "gulp sass",
+    "scss": "gulp scss",
     "test": "ulimit -n 2560 && gulp karma",
     "watch": "ulimit -n 2560 && gulp watch"
   },
@@ -24,6 +26,7 @@
     "gulp": "^3.8.11",
     "gulp-jshint": "^1.11.0",
     "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.0.1",
     "jshint-jsx": "^0.4.1",
     "karma": "^0.12.32",
     "karma-browserify": "^4.2.1",

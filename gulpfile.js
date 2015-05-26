@@ -7,6 +7,7 @@ var browserify = require('browserify');
 var reactify = require('reactify');
 var karma = require('karma').server;
 var jshint = require('gulp-jshint');
+var sass = require('gulp-sass');
 
 var handleError = function(err) {
   console.log(err.toString());
@@ -47,8 +48,17 @@ gulp.task('jsxhint', function() {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('watch', function() {
-  gulp.watch(['./src/main/js/**/*.js', './src/test/js/**/*.js'], ['browserify']);
+gulp.task('sass', function() {
+  gulp.src('./src/main/css/*.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('./public/css/'));
 });
 
-gulp.task('build', ['browserify']);
+gulp.task('scss', ['sass']);
+
+gulp.task('watch', function() {
+  gulp.watch(['./src/main/js/**/*.js', './src/test/js/**/*.js'], ['browserify']);
+  gulp.watch(['./src/main/css/**/*.scss'], ['sass']);
+});
+
+gulp.task('build', ['browserify', 'sass']);
