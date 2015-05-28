@@ -1,5 +1,15 @@
-$color: #efefef;
+// Modules
+//
+// Reusable elements that can be used across the site.
+// So far this just includes buttons.
+//
+// Styleguide 1.
+@import "./elements/buttons.scss";
 
-div {
-  background-color: $color;
-}
+// Forms
+//
+// Covers styles used for forms, such as the `<input>` and `<select>`
+// elements.
+//
+// Styleguide 2.
+@import "./forms/base.scss";
