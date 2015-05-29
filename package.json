@@ -9,7 +9,7 @@
     "clean": "gulp clean",
     "eslint": "gulp eslint",
     "jsxhint": "gulp jsxhint",
-    "kss": "kss-node --source src/main/css/ --destination doc/styleguide",
+    "kss": "gulp sass && kss-node --source src/main/css/ --destination doc/styleguide --css style.css",
     "sass": "gulp sass",
     "scss": "gulp scss",
     "test": "ulimit -n 2560 && gulp karma",

@@ -51,7 +51,8 @@ gulp.task('jsxhint', function() {
 gulp.task('sass', function() {
   gulp.src('./src/main/css/*.scss')
     .pipe(sass())
-    .pipe(gulp.dest('./public/css/'));
+    .pipe(gulp.dest('./public/css/'))
+    .pipe(gulp.dest('./doc/styleguide/'));
 });
 
 gulp.task('scss', ['sass']);
