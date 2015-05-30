@@ -5,6 +5,7 @@ var del = require('del');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var reactify = require('reactify');
+var minifyify = require('minifyify');
 var karma = require('karma').server;
 var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
@@ -23,8 +24,10 @@ gulp.task('clean', function(done) {
 gulp.task('browserify', function() {
   browserify({
     entries: ['./src/main/js/main.js'],
-    transform: [reactify]
+    transform: [reactify],
+    debug: true
   })
+    .plugin('minifyify', {output: './public/js/bundle.map.json'})
     .bundle()
     .on('error', handleError)
     .pipe(source('bundle.js'))
