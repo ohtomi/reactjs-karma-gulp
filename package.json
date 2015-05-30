@@ -7,7 +7,6 @@
     "browserify": "ulimit -n 2560 && gulp browserify",
     "build": "ulimit -n 2560 && gulp build",
     "clean": "gulp clean",
-    "eslint": "gulp eslint",
     "jsxhint": "gulp jsxhint",
     "kss": "gulp sass && kss-node --source src/main/css/ --destination doc/styleguide --css style.css --template template/",
     "sass": "gulp sass",
