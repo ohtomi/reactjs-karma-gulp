@@ -1,20 +1,13 @@
 // gulpfile.js
-
 var gulp = require('gulp');
-var del = require('del');
-var source = require('vinyl-source-stream');
-var browserify = require('browserify');
-var reactify = require('reactify');
-var minifyify = require('minifyify');
-var karma = require('karma').server;
-var jshint = require('gulp-jshint');
-var sass = require('gulp-sass');
 
 var handleError = function(err) {
   console.log(err.toString());
 };
 
 gulp.task('clean', function(done) {
+  var del = require('del');
+
   del([
     './public/js/**/*.js',
     './public/css/**/*.css'
@@ -22,6 +15,11 @@ gulp.task('clean', function(done) {
 });
 
 gulp.task('browserify', function() {
+  var browserify = require('browserify');
+  var source = require('vinyl-source-stream');
+  var reactify = require('reactify');
+  var minifyify = require('minifyify');
+
   browserify({
     entries: ['./src/main/js/main.js'],
     transform: [reactify],
@@ -35,6 +33,8 @@ gulp.task('browserify', function() {
 });
 
 gulp.task('karma', ['browserify'], function(done) {
+  var karma = require('karma').server;
+
   karma.start({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
@@ -43,7 +43,11 @@ gulp.task('karma', ['browserify'], function(done) {
   });
 });
 
+gulp.task('test', ['karma']);
+
 gulp.task('jsxhint', function() {
+  var jshint = require('gulp-jshint');
+
   gulp.src(['./src/main/js/**/*.js'])
     .pipe(jshint({
       linter: require('jshint-jsx').JSXHINT
@@ -52,6 +56,8 @@ gulp.task('jsxhint', function() {
 });
 
 gulp.task('sass', function() {
+  var sass = require('gulp-sass');
+
   gulp.src('./src/main/css/*.scss')
     .pipe(sass())
     .pipe(gulp.dest('./public/css/'))
