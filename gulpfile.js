@@ -20,16 +20,22 @@ gulp.task('browserify', function() {
   var reactify = require('reactify');
   var minifyify = require('minifyify');
 
-  browserify({
+  var taskArgs = process.argv.slice(2);
+  var noMinify = taskArgs[0] === 'browserify' && taskArgs[1] === '--no-minify';
+  var destDir = !noMinify ? './public/js/' : './doc/js/';
+
+  var b = browserify({
     entries: ['./src/main/js/main.js'],
     transform: [reactify],
     debug: true
-  })
-    .plugin('minifyify', {output: './public/js/bundle.map.json'})
-    .bundle()
+  });
+  if (!noMinify) {
+    b.plugin('minifyify', {output: './public/js/bundle.map.json'});
+  }
+  b.bundle()
     .on('error', handleError)
     .pipe(source('bundle.js'))
-    .pipe(gulp.dest('./public/js/'));
+    .pipe(gulp.dest(destDir));
 });
 
 gulp.task('karma', ['browserify'], function(done) {
