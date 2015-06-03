@@ -10,7 +10,7 @@
     "jsdoc": "ulimit -n 2560 && gulp browserify --no-minify && jsdoc -r doc/js -d doc/jsdoc",
     "jsxhint": "gulp jsxhint",
     "karma": "ulimit -n 2560 && gulp karma",
-    "kss": "gulp sass && kss-node --source src/main/css --destination doc/styleguide --css style.css --template template",
+    "kss": "gulp sass && kss-node --config kss-config.json",
     "sass": "gulp sass",
     "scss": "gulp scss",
     "test": "ulimit -n 2560 && gulp test",
