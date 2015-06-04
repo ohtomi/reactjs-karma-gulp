@@ -1,24 +1,7 @@
 // gulpfile.js
 var gulp = require('gulp');
 
-var paths = {
-  main: {
-    js: './src/main/js/',
-    css: './src/main/css/'
-  },
-  test: {
-    js: './src/test/js/'
-  },
-  dest: {
-    js: './public/js/',
-    js_no_minify: './doc/js/',
-    css: './public/css/'
-  },
-  doc: {
-    jsdoc: './doc/jsdoc/',
-    styleguide: './doc/styleguide/'
-  }
-};
+var paths = require('./gulp-config.json');
 
 gulp.task('clean', function(done) {
   var del = require('del');

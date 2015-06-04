@@ -1,0 +1,18 @@
+{
+  "main": {
+    "js": "./src/main/js/",
+    "css": "./src/main/css/"
+  },
+  "test": {
+    "js": "./src/test/js/"
+  },
+  "dest": {
+    "js": "./public/js/",
+    "js_no_minify": "./doc/js/",
+    "css": "./public/css/"
+  },
+  "doc": {
+    "jsdoc": "./doc/jsdoc/",
+    "styleguide": "./doc/styleguide/"
+  }
+}
