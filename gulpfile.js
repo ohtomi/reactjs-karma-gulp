@@ -1,16 +1,31 @@
 // gulpfile.js
 var gulp = require('gulp');
 
-var handleError = function(err) {
-  console.log(err.toString());
+var paths = {
+  main: {
+    js: './src/main/js/',
+    css: './src/main/css/'
+  },
+  test: {
+    js: './src/test/js/'
+  },
+  dest: {
+    js: './public/js/',
+    js_no_minify: './doc/js/',
+    css: './public/css/'
+  },
+  doc: {
+    jsdoc: './doc/jsdoc/',
+    styleguide: './doc/styleguide/'
+  }
 };
 
 gulp.task('clean', function(done) {
   var del = require('del');
 
   del([
-    './public/js/**/*.js',
-    './public/css/**/*.css'
+    paths.dest.js + '/**/*.js',
+    paths.dest.css + '/**/*.css'
   ], done);
 });
 
@@ -22,18 +37,21 @@ gulp.task('browserify', function() {
 
   var taskArgs = process.argv.slice(2);
   var noMinify = taskArgs[0] === 'browserify' && taskArgs[1] === '--no-minify';
-  var destDir = !noMinify ? './public/js/' : './doc/js/';
+  var destDir = !noMinify ? paths.dest.js : paths.dest.js_no_minify;
 
   var b = browserify({
-    entries: ['./src/main/js/main.js'],
+    entries: [paths.main.js + '/main.js'],
     transform: [reactify],
     debug: true
   });
   if (!noMinify) {
-    b.plugin('minifyify', {output: './public/js/bundle.map.json'});
+    b.plugin('minifyify', {output: paths.dest.js + '/bundle.map.json'});
   }
+
   b.bundle()
-    .on('error', handleError)
+    .on('error', function(err) {
+      console.log(err.toString());
+    })
     .pipe(source('bundle.js'))
     .pipe(gulp.dest(destDir));
 });
@@ -54,7 +72,7 @@ gulp.task('test', ['karma']);
 gulp.task('jsxhint', function() {
   var jshint = require('gulp-jshint');
 
-  gulp.src(['./src/main/js/**/*.js'])
+  gulp.src([paths.main.js + '/**/*.js'])
     .pipe(jshint({
       linter: require('jshint-jsx').JSXHINT
     }))
@@ -64,17 +82,17 @@ gulp.task('jsxhint', function() {
 gulp.task('sass', function() {
   var sass = require('gulp-sass');
 
-  gulp.src('./src/main/css/*.scss')
+  gulp.src(paths.main.css + '/*.scss')
     .pipe(sass())
-    .pipe(gulp.dest('./public/css/'))
-    .pipe(gulp.dest('./doc/styleguide/'));
+    .pipe(gulp.dest(paths.dest.css))
+    .pipe(gulp.dest(paths.doc.styleguide));
 });
 
 gulp.task('scss', ['sass']);
 
 gulp.task('watch', function() {
-  gulp.watch(['./src/main/js/**/*.js', './src/test/js/**/*.js'], ['browserify']);
-  gulp.watch(['./src/main/css/**/*.scss'], ['sass']);
+  gulp.watch([paths.main.js + '/**/*.js', paths.test.js + '/**/*.js'], ['browserify']);
+  gulp.watch([paths.main.css + '/**/*.scss'], ['sass']);
 });
 
 gulp.task('build', ['browserify', 'sass']);
