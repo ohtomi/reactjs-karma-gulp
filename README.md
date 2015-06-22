@@ -38,6 +38,7 @@ A boilerplate for React.js web application, Karma test runner, document generato
 ## Requirements
 
 - node.js v0.10.x
+- Google Chrome
 
 ## Usage
 
