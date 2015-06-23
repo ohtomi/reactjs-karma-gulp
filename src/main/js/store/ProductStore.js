@@ -27,12 +27,12 @@ function removeListener(listener) {
 }
 
 function setProducts(newProducts) {
-  products = newProducts;
+  products = newProducts.slice(0);
   emitter.emit('ProductStore');
 }
 
 function getProducts() {
-  return products;
+  return products.slice(0);
 }
 
 ActionDispatcher.register(function(action) {
