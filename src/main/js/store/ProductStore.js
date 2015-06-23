@@ -3,19 +3,13 @@
 
 'use strict';
 
-var PRODUCTS = [
-  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
-  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
-  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
-  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
-  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
-  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
-];
-
 var EventEmitter = require('events').EventEmitter;
 var emitter = new EventEmitter();
+var request = require('superagent');
+var FetchedAction = require('../action/FetchedAction');
 var ActionDispatcher = require('../action/ActionDispatcher');
 
+var origin = [];
 var products = [];
 
 function addListener(listener) {
@@ -26,22 +20,41 @@ function removeListener(listener) {
   emitter.removeListener('ProductStore', listener);
 }
 
+function setOrigin(newProducts) {
+  origin = products = newProducts.slice(0);
+  emitter.emit('ProductStore');
+}
+
 function setProducts(newProducts) {
   products = newProducts.slice(0);
   emitter.emit('ProductStore');
 }
 
 function getProducts() {
+  if (origin === null || origin.length === 0) {
+    request
+      .get('/api/products.json')
+      .end(function(err, res) {
+        var json = res.body;
+        FetchedAction.update(json);
+      });
+  }
   return products.slice(0);
 }
 
 ActionDispatcher.register(function(action) {
+  if (action.type === 'FetchedAction') {
+    var fetchedProducts = action.payload.products;
+    setOrigin(fetchedProducts);
+    return;
+  }
+
   if (action.type === 'SearchAction') {
     var name = action.payload.name;
     var inStockOnly = action.payload.inStockOnly ? true : false;
     var result = [];
 
-    PRODUCTS.forEach(function(product) {
+    origin.forEach(function(product) {
       if (product.name.indexOf(name) === -1) {
         return;
       }
@@ -55,10 +68,6 @@ ActionDispatcher.register(function(action) {
     return;
   }
 });
-
-setTimeout(function() {
-  setProducts(PRODUCTS);
-}, 300);
 
 module.exports = {
   addListener: addListener,

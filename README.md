@@ -6,6 +6,7 @@ A boilerplate for React.js web application, Karma test runner, document generato
 
 - runtime modules
   - react 0.13.3
+  - superagent 1.2.0
 
 - gulp w/plugins
   - gulp 3.8.11

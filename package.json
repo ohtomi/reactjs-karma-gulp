@@ -19,7 +19,8 @@
   "author": "Kenichi Ohtomi",
   "license": "MIT",
   "dependencies": {
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "superagent": "^1.2.0"
   },
   "devDependencies": {
     "babelify": "^6.1.1",
