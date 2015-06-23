@@ -13,6 +13,7 @@
     "kss": "gulp sass && kss-node --config kss-config.json",
     "sass": "gulp sass",
     "scss": "gulp scss",
+    "start": "cd public && python -m SimpleHTTPServer 8080",
     "test": "ulimit -n 2560 && gulp test",
     "watch": "ulimit -n 2560 && gulp watch"
   },

@@ -40,6 +40,7 @@ A boilerplate for React.js web application, Karma test runner, document generato
 
 - node.js v0.10.x
 - Google Chrome
+- Python
 
 ## Usage
 
@@ -64,6 +65,8 @@ Available scripts in the reactjs-karma-gulp package:
     gulp sass
   scss
     gulp scss
+  start
+    cd public && python -m SimpleHTTPServer 8080
   test
     ulimit -n 2560 && gulp test
   watch
