@@ -42,6 +42,7 @@ var FilterableProductTable = React.createClass({
   render: function() {
     return (
       <div>
+        <h1 data-l10n-id="applicationName"></h1>
         <SearchBar name={this.state.name} inStockOnly={this.state.inStockOnly} onUserInput={this.handleUserInput} />
         <ProductTable products={this.state.products} />
       </div>
