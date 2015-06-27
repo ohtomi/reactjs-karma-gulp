@@ -19,9 +19,11 @@ var SearchBar = React.createClass({
       <form>
         <input type="text" placeholder="Search..." ref="nameInput" onChange={this.handleChange} />
         <p>
+          <label>
           <input type="checkbox" ref="inStockOnlyInput" onChange={this.handleChange} />
           {' '}
           Only show products in stock
+          </label>
         </p>
       </form>
     );
