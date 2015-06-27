@@ -14,15 +14,30 @@ var SearchBar = React.createClass({
     );
   },
 
+  handleSelectJa: function() {
+    this.props.onUserSelect('ja');
+  },
+
+  handleSelectEn: function() {
+    this.props.onUserSelect('en-US');
+  },
+
   render: function() {
     return (
       <form>
+        <p>
+          Select language:
+          {' '}
+          <a href="#" onClick={this.handleSelectJa}>Japanese</a>
+          {' '}
+          <a href="#" onClick={this.handleSelectEn}>English</a>
+        </p>
         <input type="text" placeholder="Search..." ref="nameInput" onChange={this.handleChange} />
         <p>
           <label>
-          <input type="checkbox" ref="inStockOnlyInput" onChange={this.handleChange} />
-          {' '}
-          Only show products in stock
+            <input type="checkbox" ref="inStockOnlyInput" onChange={this.handleChange} />
+            {' '}
+            Only show products in stock
           </label>
         </p>
       </form>
