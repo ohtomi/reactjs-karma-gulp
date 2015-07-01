@@ -6,6 +6,7 @@
 var React = require('react');
 var L20nStore = require('../store/L20nStore');
 var L20nAction = require('../action/L20nAction');
+var L20nUtils = require('../utils/L20nUtils');
 var ProductStore = require('../store/ProductStore');
 var SearchAction = require('../action/SearchAction');
 var SearchBar = require('./SearchBar');
@@ -54,10 +55,7 @@ var FilterableProductTable = React.createClass({
   },
 
   render: function() {
-    var applicationName = '';
-    if (!!this.state.l20n) {
-      applicationName = this.state.l20n.getSync('applicationName');
-    }
+    var applicationName = L20nUtils.localize(this.state.l20n, 'applicationName');
 
     return (
       <div>
