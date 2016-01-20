@@ -26,6 +26,7 @@
   "devDependencies": {
     "babelify": "^6.1.1",
     "browserify": "^10.2.1",
+    "del": "^2.2.0",
     "espowerify": "^0.10.0",
     "gulp": "^3.8.11",
     "gulp-jshint": "^1.11.0",
