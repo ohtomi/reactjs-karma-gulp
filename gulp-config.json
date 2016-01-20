@@ -8,7 +8,6 @@
   },
   "dest": {
     "js": "./public/js/",
-    "js_no_minify": "./doc/js/",
     "css": "./public/css/"
   },
   "doc": {

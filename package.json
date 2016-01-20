@@ -4,20 +4,16 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "browserify": "ulimit -n 2560 && gulp browserify",
-    "build": "ulimit -n 2560 && gulp build",
-    "clean": "gulp clean",
-    "jsdoc": "ulimit -n 2560 && gulp browserify --no-minify && jsdoc -r doc/js -d doc/jsdoc",
-    "jsxhint": "gulp jsxhint",
-    "karma": "ulimit -n 2560 && gulp karma",
-    "kss": "gulp sass && kss-node --config kss-config.json",
-    "sass": "gulp sass",
-    "scss": "gulp scss",
-    "start": "cd public && python -m SimpleHTTPServer 8080",
-    "test": "ulimit -n 2560 && gulp test",
-    "watch": "ulimit -n 2560 && gulp watch"
+    "build": "ulimit -n 2560; gulp build",
+    "clean": "gulp del",
+    "doc": "ulimit -n 2560; jsdoc -r public/js -d doc/jsdoc; kss-node --config kss-config.json",
+    "lint": "gulp jsxhint",
+    "server": "cd public; python -m SimpleHTTPServer 8080",
+    "test": "ulimit -n 2560; gulp karma",
+    "watch": "ulimit -n 2560; gulp watch"
   },
   "author": "Kenichi Ohtomi",
+  "repository": "ohtomi/reactjs-karma-gulp",
   "license": "MIT",
   "dependencies": {
     "react": "^0.13.3",
@@ -29,9 +25,10 @@
     "del": "^2.2.0",
     "espowerify": "^0.10.0",
     "gulp": "^3.8.11",
+    "gulp-if": "^2.0.0",
     "gulp-jshint": "^1.11.0",
-    "gulp-plumber": "^1.0.1",
     "gulp-sass": "^2.0.1",
+    "gulp-sourcemaps": "^1.6.0",
     "jsdoc": "^3.3.0",
     "jshint-jsx": "^0.4.1",
     "karma": "^0.12.32",
@@ -40,10 +37,11 @@
     "karma-cli": "0.0.4",
     "karma-mocha": "^0.1.10",
     "kss": "^2.1.0",
-    "minifyify": "^7.0.0",
     "mocha": "^2.2.5",
     "power-assert": "^0.11.0",
     "reactify": "^1.1.1",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
   }
 }

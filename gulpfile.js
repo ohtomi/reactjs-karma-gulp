@@ -1,81 +1,94 @@
 // gulpfile.js
-var gulp = require('gulp');
+'use strict';
 
+var gulp = require('gulp');
 var paths = require('./gulp-config.json');
 
-gulp.task('clean', function(done) {
-  var del = require('del');
+gulp.task('del', function(done) {
+    var del = require('del');
 
-  del([
-    paths.dest.js + '/**/*.js',
-    paths.dest.css + '/**/*.css'
-  ], done);
+    return del([
+        paths.dest.js + '/**/*.js',
+        paths.dest.js + '/**/*.js.map',
+        paths.dest.css + '/**/*.css'
+    ], done);
 });
+
+function compile(doMinify, doWatch) {
+    var watchify = require('watchify');
+    var browserify = require('browserify');
+    var reactify = require('reactify');
+    var source = require('vinyl-source-stream');
+    var buffer = require('vinyl-buffer');
+    var sourcemaps = require('gulp-sourcemaps');
+    var gulpif = require('gulp-if');
+
+    var opts = {
+        entries: [paths.main.js + '/main.js'],
+        transform: [reactify],
+        debug: true
+    };
+    var b = doWatch ? watchify(browserify(opts)) : browserify(opts);
+
+    function bundle() {
+        return b.bundle()
+            .on('error', function(err) {
+                console.log(err.toString());
+            })
+            .pipe(source('bundle.js'))
+            .pipe(buffer())
+            .pipe(gulpif(doMinify, sourcemaps.init({loadMaps: true})))
+            .pipe(gulpif(doMinify, sourcemaps.write('.')))
+            .pipe(gulp.dest(paths.dest.js));
+    }
+
+    b.on('update', bundle);
+    b.on('log', function(msg) {
+        console.log(msg);
+    });
+
+    return bundle();
+}
 
 gulp.task('browserify', function() {
-  var browserify = require('browserify');
-  var source = require('vinyl-source-stream');
-  var reactify = require('reactify');
-  var minifyify = require('minifyify');
-
-  var taskArgs = process.argv.slice(2);
-  var noMinify = taskArgs[0] === 'browserify' && taskArgs[1] === '--no-minify';
-  var destDir = !noMinify ? paths.dest.js : paths.dest.js_no_minify;
-
-  var b = browserify({
-    entries: [paths.main.js + '/main.js'],
-    transform: [reactify],
-    debug: true
-  });
-  if (!noMinify) {
-    b.plugin('minifyify', {output: paths.dest.js + '/bundle.map.json'});
-  }
-
-  b.bundle()
-    .on('error', function(err) {
-      console.log(err.toString());
-    })
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest(destDir));
+    return compile(false, true);
 });
 
-gulp.task('karma', ['browserify'], function(done) {
-  var karma = require('karma').server;
+gulp.task('karma', function(done) {
+    var karma = require('karma').server;
 
-  karma.start({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, function(exitStatus) {
-    done(exitStatus ? 'There are failing unit tests' : undefined);
-  });
+    karma.start({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+        }, function(exitStatus) {
+            done(exitStatus ? 'There are failing unit tests' : undefined);
+        });
 });
-
-gulp.task('test', ['karma']);
 
 gulp.task('jsxhint', function() {
-  var jshint = require('gulp-jshint');
+    var jshint = require('gulp-jshint');
 
-  gulp.src([paths.main.js + '/**/*.js'])
-    .pipe(jshint({
-      linter: require('jshint-jsx').JSXHINT
-    }))
-    .pipe(jshint.reporter('default'));
+    return gulp.src([paths.main.js + '/**/*.js'])
+        .pipe(jshint({
+            linter: require('jshint-jsx').JSXHINT
+        }))
+        .pipe(jshint.reporter('default'));
 });
 
 gulp.task('sass', function() {
-  var sass = require('gulp-sass');
+    var sass = require('gulp-sass');
 
-  gulp.src(paths.main.css + '/*.scss')
-    .pipe(sass())
-    .pipe(gulp.dest(paths.dest.css))
-    .pipe(gulp.dest(paths.doc.styleguide));
+    return gulp.src(paths.main.css + '/*.scss')
+        .pipe(sass())
+        .pipe(gulp.dest(paths.dest.css))
+        .pipe(gulp.dest(paths.doc.styleguide));
 });
 
-gulp.task('scss', ['sass']);
-
-gulp.task('watch', function() {
-  gulp.watch([paths.main.js + '/**/*.js', paths.test.js + '/**/*.js'], ['browserify']);
-  gulp.watch([paths.main.css + '/**/*.scss'], ['sass']);
+gulp.task('watch', ['browserify'], function() {
+    gulp.watch([paths.test.js + '/**/*.js'], ['karma']);
+    gulp.watch([paths.main.css + '/**/*.scss'], ['sass']);
 });
 
-gulp.task('build', ['browserify', 'sass']);
+gulp.task('build', ['sass'], function() {
+    return compile(true, false);
+});

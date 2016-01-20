@@ -4,20 +4,23 @@
 
 A boilerplate for React.js web application, Karma test runner, document generator.
 
-- runtime modules
+- runtime npm modules
   - react 0.13.3
   - superagent 1.2.0
 
 - gulp w/plugins
   - gulp 3.8.11
+  - gulp-if 2.0.0
   - gulp-jshint 1.11.0
-  - gulp-plumber 1.0.1
   - gulp-sass 2.0.1
+  - gulp-sourcemaps 1.6.0
   - browserify 10.2.1
+  - del 2.2.0
   - jshint-jsx 0.4.1
-  - minifyify 7.0.0
   - reactify 1.1.1
+  - vinyl-buffer 1.0.0
   - vinyl-source-stream 1.1.0
+  - watchify 3.7.0
 
 - karma w/plugins
   - karma 0.12.32
@@ -47,31 +50,20 @@ A boilerplate for React.js web application, Karma test runner, document generato
 ```
 $ npm run
 Available scripts in the reactjs-karma-gulp package:
-  browserify
-    ulimit -n 2560 && gulp browserify
   build
-    ulimit -n 2560 && gulp build
+    ulimit -n 2560; gulp build
   clean
-    gulp clean
-  jsdoc
-    ulimit -n 2560 && gulp browserify --no-minify && jsdoc -r doc/js -d doc/jsdoc
-  jsxhint
+    gulp del
+  doc
+    ulimit -n 2560; jsdoc -r public/js -d doc/jsdoc; kss-node --config kss-config.json
+  lint
     gulp jsxhint
-  karma
-    ulimit -n 2560 && gulp karma
-  kss
-    gulp sass && kss-node --config kss-config.json
-  sass
-    gulp sass
-  scss
-    gulp scss
-  start
-    cd public && python -m SimpleHTTPServer 8080
+  server
+    cd public; python -m SimpleHTTPServer 8080
   test
-    ulimit -n 2560 && gulp test
+    ulimit -n 2560; gulp karma
   watch
-    ulimit -n 2560 && gulp watch
-
+    ulimit -n 2560; gulp watch
 ```
 
 ## Contributing
