@@ -8,7 +8,7 @@
     "clean": "gulp del",
     "doc": "ulimit -n 2560; jsdoc -r public/js -d doc/jsdoc; kss-node --config kss-config.json",
     "lint": "gulp jsxhint",
-    "server": "cd public; python -m SimpleHTTPServer 8080",
+    "server": "json-server --port 8080 --static ./public --watch mock.json",
     "test": "ulimit -n 2560; gulp karma",
     "watch": "ulimit -n 2560; gulp watch"
   },
@@ -31,6 +31,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "jsdoc": "^3.3.0",
     "jshint-jsx": "^0.4.1",
+    "json-server": "^0.8.6",
     "karma": "^0.12.32",
     "karma-browserify": "^4.2.1",
     "karma-chrome-launcher": "^0.1.12",

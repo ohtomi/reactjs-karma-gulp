@@ -33,7 +33,7 @@ function setProducts(newProducts) {
 function getProducts() {
   if (origin === null || origin.length === 0) {
     request
-      .get('/api/products.json')
+      .get('/products')
       .end(function(err, res) {
         var json = res.body;
         FetchedAction.update(json);
