@@ -33,6 +33,9 @@ A boilerplate for React.js web application, Karma test runner, document generato
   - mocha 2.2.5
   - power-assert 0.11.0
 
+- static file server, api mock server
+  - json-server 0.8.6
+
 - jsdoc3
   - jsdoc 3.3.0
 
@@ -59,7 +62,7 @@ Available scripts in the reactjs-karma-gulp package:
   lint
     gulp jsxhint
   server
-    cd public; python -m SimpleHTTPServer 8080
+    json-server --port 8080 --static ./public --watch mock.json
   test
     ulimit -n 2560; gulp karma
   watch
