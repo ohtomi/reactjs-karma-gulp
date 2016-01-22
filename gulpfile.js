@@ -20,6 +20,7 @@ function compile(doMinify, doWatch) {
     var reactify = require('reactify');
     var source = require('vinyl-source-stream');
     var buffer = require('vinyl-buffer');
+    var uglify = require('gulp-uglify');
     var sourcemaps = require('gulp-sourcemaps');
     var gulpif = require('gulp-if');
 
@@ -37,8 +38,9 @@ function compile(doMinify, doWatch) {
             })
             .pipe(source('bundle.js'))
             .pipe(buffer())
-            .pipe(gulpif(doMinify, sourcemaps.init({loadMaps: true})))
-            .pipe(gulpif(doMinify, sourcemaps.write('.')))
+            .pipe(sourcemaps.init({loadMaps: true}))
+            .pipe(gulpif(doMinify, uglify()))
+            .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest(paths.dest.js));
     }
 
