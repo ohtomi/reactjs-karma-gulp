@@ -17,7 +17,7 @@ gulp.task('del', function(done) {
 function compile(doMinify, doWatch) {
     var watchify = require('watchify');
     var browserify = require('browserify');
-    var reactify = require('reactify');
+    var babelify = require('babelify');
     var source = require('vinyl-source-stream');
     var buffer = require('vinyl-buffer');
     var uglify = require('gulp-uglify');
@@ -26,7 +26,7 @@ function compile(doMinify, doWatch) {
 
     var opts = {
         entries: [paths.main.js + '/main.js'],
-        transform: [reactify],
+        transform: [babelify],
         debug: true
     };
     var b = doWatch ? watchify(browserify(opts)) : browserify(opts);

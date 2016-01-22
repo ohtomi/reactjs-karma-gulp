@@ -4,8 +4,9 @@
 'use strict';
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var FilterableProductTable = require('./component/FilterableProductTable');
 
-React.render(<FilterableProductTable />, document.getElementById('content'));
+ReactDOM.render(<FilterableProductTable />, document.getElementById('content'));
 
 })();

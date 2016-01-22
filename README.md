@@ -5,7 +5,8 @@
 A boilerplate for React.js web application, Karma test runner, document generator.
 
 - runtime npm modules
-  - react 0.13.3
+  - react 0.14.6
+  - react-dom 0.14.6
   - superagent 1.2.0
 
 - gulp w/plugins
@@ -15,9 +16,9 @@ A boilerplate for React.js web application, Karma test runner, document generato
   - gulp-sass 2.0.1
   - gulp-sourcemaps 1.6.0
   - browserify 10.2.1
+  - babelify 6.1.1
   - del 2.2.0
   - jshint-jsx 0.4.1
-  - reactify 1.1.1
   - vinyl-buffer 1.0.0
   - vinyl-source-stream 1.1.0
   - watchify 3.7.0
@@ -32,6 +33,7 @@ A boilerplate for React.js web application, Karma test runner, document generato
   - espowerify 0.10.0
   - mocha 2.2.5
   - power-assert 0.11.0
+  - react-addons-test-utils 0.14.6
 
 - static file server, api mock server
   - json-server 0.8.6

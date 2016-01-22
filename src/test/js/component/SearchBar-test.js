@@ -1,9 +1,9 @@
 // SearchBar-test.js
 var assert = require('power-assert');
-var React = require('react/addons');
+var React = require('react');
+var ReactDOM = require('react-dom');
+var ReactTestUtils = require('react-addons-test-utils');
 var SearchBar = require('../../../main/js/component/SearchBar');
-
-var TestUtils = React.addons.TestUtils;
 
 describe('SearchBar', function() {
 
@@ -13,20 +13,20 @@ describe('SearchBar', function() {
   beforeEach(function() {
     onUserInput = function(name, inStockOnly) {
     };
-    component = TestUtils.renderIntoDocument(<SearchBar onUserInput={onUserInput} />);
+    component = ReactTestUtils.renderIntoDocument(<SearchBar onUserInput={onUserInput} />);
   });
 
-  it('returns ', function() {
+  it('returns', function() {
     var nameInput = component.refs.nameInput;
     var inStockOnlyInput = component.refs.inStockOnlyInput;
 
     assert(
-      React.findDOMNode(nameInput).textContent
+      ReactDOM.findDOMNode(nameInput).textContent
       ===
       ''
     );
     assert(
-      React.findDOMNode(inStockOnlyInput).checked
+      ReactDOM.findDOMNode(inStockOnlyInput).checked
       ===
       false
     )
