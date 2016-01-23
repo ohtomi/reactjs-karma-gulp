@@ -26,7 +26,10 @@ function compile(doMinify, doWatch) {
 
     var opts = {
         entries: [paths.main.js + '/main.js'],
-        transform: [babelify],
+        transform: [[babelify, {presets: ['es2015', 'react']}]],
+//        transform: [babelify.configure({
+//            presets: ['es2015', 'react']
+//        })],
         debug: true
     };
     var b = doWatch ? watchify(browserify(opts)) : browserify(opts);

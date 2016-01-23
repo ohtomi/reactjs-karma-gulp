@@ -16,7 +16,9 @@ A boilerplate for React.js web application, Karma test runner, document generato
   - gulp-sass 2.0.1
   - gulp-sourcemaps 1.6.0
   - browserify 10.2.1
-  - babelify 6.1.1
+  - babelify 7.2.0
+  - babel-preset-es2015 6.3.13
+  - babel-preset-react 6.3.13
   - del 2.2.0
   - jshint-jsx 0.4.1
   - vinyl-buffer 1.0.0
