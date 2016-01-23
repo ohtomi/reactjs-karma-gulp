@@ -9,8 +9,8 @@ var SearchBar = React.createClass({
 
   handleChange: function() {
     this.props.onUserInput(
-      this.refs.nameInput.getDOMNode().value,
-      this.refs.inStockOnlyInput.getDOMNode().checked
+      this.refs.nameInput.value,
+      this.refs.inStockOnlyInput.checked
     );
   },
 
