@@ -5,50 +5,50 @@
 A boilerplate for React.js web application, Karma test runner, document generator.
 
 - runtime npm modules
-  - react 0.14.6
-  - react-dom 0.14.6
-  - superagent 1.2.0
+  - react
+  - react-dom
+  - superagent
 
 - gulp w/plugins
-  - gulp 3.8.11
-  - gulp-if 2.0.0
-  - gulp-jshint 1.11.0
-  - gulp-sass 2.0.1
-  - gulp-sourcemaps 1.6.0
-  - browserify 10.2.1
-  - babelify 7.2.0
-  - babel-preset-es2015 6.3.13
-  - babel-preset-react 6.3.13
-  - del 2.2.0
-  - jshint-jsx 0.4.1
-  - vinyl-buffer 1.0.0
-  - vinyl-source-stream 1.1.0
-  - watchify 3.7.0
+  - gulp
+  - gulp-if
+  - gulp-jshint
+  - gulp-sass
+  - gulp-sourcemaps
+  - browserify
+  - babelify
+  - babel-preset-es2015
+  - babel-preset-react
+  - del
+  - jshint-jsx
+  - vinyl-buffer
+  - vinyl-source-stream
+  - watchify
 
 - karma w/plugins
-  - karma 0.12.32
-  - karma-browserify 4.2.1
-  - karma-chrome-launcher 0.1.12
-  - karma-cli 0.0.4
-  - karma-mocha 0.1.10
-  - babelify 6.1.1
-  - espowerify 0.10.0
-  - mocha 2.2.5
-  - power-assert 0.11.0
-  - react-addons-test-utils 0.14.6
+  - karma
+  - karma-browserify
+  - karma-chrome-launcher
+  - karma-cli
+  - karma-mocha
+  - babelify
+  - espowerify
+  - mocha
+  - power-assert
+  - react-addons-test-utils
 
 - static file server, api mock server
-  - json-server 0.8.6
+  - json-server
 
 - jsdoc3
-  - jsdoc 3.3.0
+  - jsdoc
 
 - kss-node
-  - kss 2.1.0
+  - kss
 
 ## Requirements
 
-- node.js v0.10.x
+- node.js
 - Google Chrome
 - Python
 
